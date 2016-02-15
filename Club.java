@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Store details of club memberships.
  * 
@@ -18,6 +19,7 @@ public class Club
         members = new ArrayList<Membership>();
 
     }
+
     /**
      * Add a new member to the club's list of members.
      * @param member The member object to be added.
@@ -52,11 +54,47 @@ public class Club
         String name = "";
         int year = 0;
         Membership member = new Membership(name,month,year);
-        for(int numSocios = 0; numSocios < members.size(); numSocios++){
-            numSocios = member.getMonth();
-           
+        if(month <= 1 && month <= 12){
+            for(int numSocios = 0; numSocios < members.size(); numSocios++){
+                numSocios = member.getMonth();
+
+            }
         }
         
-         return member.getMonth();
+        else{
+                System.out.println("El mes introducido es erroneo");
+        }
+        return member.getMonth();
+    }
+
+    /** 
+     * Todos los socios que se han dado de alta un determinado mes de un determinado año se
+     * dan de baja. En caso de que el parametro month contenga un valor no valido se muestra 
+     * por pantalla el error.
+     * @param month El mes en el que estamos interesados
+     * @param year El año en el que estamos interesados
+     * @return Una coleccion con los socios que se han dado de baja del club
+     */
+
+    public ArrayList<Membership> purge(int month, int year){
+        String nombre = "";
+        ArrayList <Membership> miembrosBaneados = null;
+        
+        
+        if(month <= 1 && month <= 12){
+            miembrosBaneados = new ArrayList<>();
+             Iterator<Membership> iterador = members.iterator();
+                Membership miembro = iterador.next();
+           while(iterador.hasNext()){
+               
+                    miembrosBaneados.add(miembro);
+                    iterador.remove();
+                
+            }
+        }
+       else{
+                System.out.println("El mes introducido es erroneo");
+        }
+        return miembrosBaneados;
     }
 }
